@@ -11,6 +11,18 @@ display_url: https://joshuagnathan.com
 media_folder: images
 public_folder: /images
 
+# Shrink and compress photos automatically before they're saved,
+# so huge camera files upload reliably and the site stays fast.
+media_libraries:
+  default:
+    config:
+      transformations:
+        raster_image:
+          format: webp
+          quality: 85
+          width: 2400
+          height: 2400
+
 collections:
   - name: pages
     label: Website
@@ -22,12 +34,12 @@ collections:
         fields:
           - name: photos
             label: Photos (newest first; the home page shows the first 6)
-            label_singular: Photo
+            label_singular: Photo batch
             widget: list
             summary: "{{fields.caption}}"
             fields:
-              - { name: image, label: Photo, widget: image }
-              - { name: caption, label: Caption, widget: string, required: false }
+              - { name: images, label: Photos (select as many as you want at once), widget: image, multiple: true }
+              - { name: caption, label: Caption (applies to every photo in this batch), widget: string, required: false }
               - { name: category, label: Category (astro, nature, film, travel...), widget: string, required: false }
 
       - name: trips
@@ -45,15 +57,7 @@ collections:
               - { name: place, label: Where, widget: string, required: false }
               - { name: when, label: When (for example "Summer 2026"), widget: string, required: false }
               - { name: description, label: Description (leave a blank line between paragraphs), widget: text, required: false }
-              - name: photos
-                label: Trip photos
-                label_singular: Photo
-                widget: list
-                required: false
-                summary: "{{fields.caption}}"
-                fields:
-                  - { name: image, label: Photo, widget: image }
-                  - { name: caption, label: Caption, widget: string, required: false }
+              - { name: images, label: Trip photos (select as many as you want at once), widget: image, multiple: true, required: false }
 
       - name: projects
         label: Projects
@@ -70,7 +74,7 @@ collections:
               - { name: status, label: Status (for example "Ongoing" or "Completed 2026"), widget: string, required: false }
               - { name: summary, label: One-sentence summary, widget: string, required: false }
               - { name: description, label: Description (leave a blank line between paragraphs), widget: text, required: false }
-              - { name: image, label: Photo, widget: image, required: false }
+              - { name: images, label: Photos (one or many), widget: image, multiple: true, required: false }
 
       - name: site
         label: About and site info
