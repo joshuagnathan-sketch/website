@@ -1,0 +1,85 @@
+# Settings for the admin dashboard at /admin (Sveltia CMS).
+backend:
+  name: github
+  repo: joshuagnathan-sketch/website
+  branch: main
+
+site_url: https://joshuagnathan.com
+display_url: https://joshuagnathan.com
+
+# Uploaded photos are saved in /images
+media_folder: images
+public_folder: /images
+
+collections:
+  - name: pages
+    label: Website
+    files:
+      - name: photos
+        label: Photos
+        file: content/photos.json
+        format: json
+        fields:
+          - name: photos
+            label: Photos (newest first; the home page shows the first 6)
+            label_singular: Photo
+            widget: list
+            summary: "{{fields.caption}}"
+            fields:
+              - { name: image, label: Photo, widget: image }
+              - { name: caption, label: Caption, widget: string, required: false }
+              - { name: category, label: Category (astro, nature, film, travel...), widget: string, required: false }
+
+      - name: trips
+        label: Trips
+        file: content/trips.json
+        format: json
+        fields:
+          - name: trips
+            label: Trips (newest first)
+            label_singular: Trip
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { name: title, label: Trip name, widget: string }
+              - { name: place, label: Where, widget: string, required: false }
+              - { name: when, label: When (for example "Summer 2026"), widget: string, required: false }
+              - { name: description, label: Description (leave a blank line between paragraphs), widget: text, required: false }
+              - name: photos
+                label: Trip photos
+                label_singular: Photo
+                widget: list
+                required: false
+                summary: "{{fields.caption}}"
+                fields:
+                  - { name: image, label: Photo, widget: image }
+                  - { name: caption, label: Caption, widget: string, required: false }
+
+      - name: projects
+        label: Projects
+        file: content/projects.json
+        format: json
+        fields:
+          - name: projects
+            label: Projects
+            label_singular: Project
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { name: title, label: Project name, widget: string }
+              - { name: status, label: Status (for example "Ongoing" or "Completed 2026"), widget: string, required: false }
+              - { name: summary, label: One-sentence summary, widget: string, required: false }
+              - { name: description, label: Description (leave a blank line between paragraphs), widget: text, required: false }
+              - { name: image, label: Photo, widget: image, required: false }
+
+      - name: site
+        label: About and site info
+        file: content/site.json
+        format: json
+        fields:
+          - { name: name, label: Your name, widget: string }
+          - { name: tagline, label: Home page tagline, widget: string, required: false }
+          - { name: about, label: About me (leave a blank line between paragraphs), widget: text, required: false }
+          - { name: gear, label: Gear, label_singular: Item, widget: list, field: { name: item, label: Item, widget: string }, required: false }
+          - { name: email, label: Public email (optional, leave blank to hide), widget: string, required: false }
+          - { name: instagram, label: Instagram username (optional), widget: string, required: false }
