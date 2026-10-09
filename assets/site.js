@@ -92,7 +92,12 @@
     (entries || []).forEach(function (e) {
       if (!e) return;
       var imgs = [].concat(e.images || [], e.image || []);
-      imgs.forEach(function (src) { if (src) out.push({ image: src, caption: e.caption || '', category: e.category || '' }); });
+      // "captions" holds one caption per line, in the same order as the photos.
+      var caps = String(e.captions || '').split('\n');
+      imgs.forEach(function (src, i) {
+        var c = (caps[i] || '').trim();
+        if (src) out.push({ image: src, caption: c || e.caption || '', category: e.category || '' });
+      });
     });
     return out;
   }
@@ -180,7 +185,7 @@
         if (meta) left.append(el('p', { class: 'trip-meta', text: meta }));
         var right = el('div', { class: 'prose' }, paragraphs(t.description));
         var art = el('article', { class: 'trip' }, el('div', { class: 'trip-head' }, left, right));
-        var pics = flat([{ images: t.images }].concat(t.photos || []));
+        var pics = flat([{ images: t.images, captions: t.captions }].concat(t.photos || []));
         if (pics.length) art.append(gallery(pics));
         holder.append(art);
       });
