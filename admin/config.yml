@@ -36,11 +36,12 @@ collections:
             label: Photos (newest first; the home page shows the first 6)
             label_singular: Photo batch
             widget: list
-            summary: "{{fields.caption}}"
+            summary: "{{fields.category}} {{fields.caption}}"
             fields:
               - { name: images, label: Photos (select as many as you want at once), widget: image, multiple: true }
-              - { name: caption, label: Caption (applies to every photo in this batch), widget: string, required: false }
-              - { name: category, label: Category (astro, nature, film, travel...), widget: string, required: false }
+              - { name: captions, label: "Captions, one per line (line 1 = first photo, line 2 = second photo...). Leave a line blank to skip a photo.", widget: text, required: false }
+              - { name: caption, label: Shared caption (used for any photo without its own line above), widget: string, required: false }
+              - { name: category, label: "Category (astro, nature, film, travel...)", widget: string, required: false }
 
       - name: trips
         label: Trips
@@ -58,6 +59,7 @@ collections:
               - { name: when, label: When (for example "Summer 2026"), widget: string, required: false }
               - { name: description, label: Description (leave a blank line between paragraphs), widget: text, required: false }
               - { name: images, label: Trip photos (select as many as you want at once), widget: image, multiple: true, required: false }
+              - { name: captions, label: "Photo captions, one per line, in the same order as the photos above", widget: text, required: false }
 
       - name: projects
         label: Projects
@@ -85,5 +87,5 @@ collections:
           - { name: tagline, label: Home page tagline, widget: string, required: false }
           - { name: about, label: About me (leave a blank line between paragraphs), widget: text, required: false }
           - { name: gear, label: Gear, label_singular: Item, widget: list, field: { name: item, label: Item, widget: string }, required: false }
-          - { name: email, label: Public email (optional, leave blank to hide), widget: string, required: false }
+          - { name: email, label: "Public email (optional, leave blank to hide)", widget: string, required: false }
           - { name: instagram, label: Instagram username (optional), widget: string, required: false }
