@@ -1,4 +1,5 @@
 # Settings for the admin dashboard at /admin (Sveltia CMS).
+# Everything here edits files in /content; the website reads those files.
 backend:
   name: github
   repo: joshuagnathan-sketch/website
@@ -6,13 +7,15 @@ backend:
 
 site_url: https://joshuagnathan.com
 display_url: https://joshuagnathan.com
+logo_url: /assets/mark.svg
 
 # Uploaded photos are saved in /images
 media_folder: images
 public_folder: /images
 
-# Shrink and compress photos automatically before they're saved,
-# so huge camera files upload reliably and the site stays fast.
+# Shrink and compress photos in the browser before they're uploaded, so huge
+# camera files upload reliably. After saving, GitHub turns, resizes and
+# watermarks them (see .github/workflows/watermark.yml).
 media_libraries:
   default:
     config:
@@ -26,6 +29,8 @@ media_libraries:
 collections:
   - name: pages
     label: Website
+
+    editor: { preview: false }
     files:
       - name: photos
         label: Photos
@@ -33,15 +38,59 @@ collections:
         format: json
         fields:
           - name: photos
-            label: Photos (newest first; the home page shows the first 6)
+            label: Photo batches
             label_singular: Photo batch
+            hint: "Newest batch first. The first 6 photos also show on your home page. Photos get the © JGN Photography watermark about a minute after you save."
             widget: list
+            add_to_top: true
+            collapsed: auto
             summary: "{{fields.category}} {{fields.caption}}"
+            thumbnail: images
             fields:
-              - { name: images, label: Photos (select as many as you want at once), widget: image, multiple: true }
-              - { name: captions, label: "Captions, one per line (line 1 = first photo, line 2 = second photo...). Leave a line blank to skip a photo.", widget: text, required: false }
-              - { name: caption, label: Shared caption (used for any photo without its own line above), widget: string, required: false }
-              - { name: category, label: "Category (astro, nature, film, travel...)", widget: string, required: false }
+              - name: images
+                label: Photos
+                hint: "Select as many as you like at once (Shift- or Cmd-click). Drag them to change the order."
+                widget: image
+                multiple: true
+              - name: captions
+                label: Captions
+                hint: "One line per photo, in the same order as above: line 1 is the first photo, line 2 the second, and so on. Leave a line blank to skip a photo."
+                widget: text
+                required: false
+              - name: caption
+                label: Shared caption
+                hint: "Optional. Used for any photo that doesn't have its own line above."
+                widget: string
+                required: false
+              - name: category
+                label: Category
+                hint: "One word, like *astro*, *nature*, *film* or *travel*. Each category becomes a filter button on JGN Photography."
+                widget: string
+                required: false
+
+      - name: fixes
+        label: Fix a sideways photo
+        file: content/fixes.json
+        format: json
+        fields:
+          - name: fixes
+            label: Photos to turn
+            label_singular: Photo to turn
+            hint: "If a photo shows up sideways or upside down, add it here and pick which way to turn it. The site updates about a minute after you save. To undo, remove it from this list."
+            widget: list
+            add_to_top: true
+            summary: "{{fields.turn}}: {{fields.photo}}"
+            thumbnail: photo
+            fields:
+              - { name: photo, label: Photo, widget: image, hint: "Pick the photo from your media library." }
+              - name: turn
+                label: Turn it
+                widget: select
+                default: clockwise
+                options:
+                  - { label: "Clockwise ↻ (a quarter turn right)", value: clockwise }
+                  - { label: "Counter-clockwise ↺ (a quarter turn left)", value: counterclockwise }
+                  - { label: "Upside down", value: upside-down }
 
       - name: trips
         label: Trips
@@ -49,17 +98,21 @@ collections:
         format: json
         fields:
           - name: trips
-            label: Trips (newest first)
+            label: Trips
             label_singular: Trip
+            hint: "Newest trip first."
             widget: list
+            add_to_top: true
+            collapsed: auto
             summary: "{{fields.title}}"
+            thumbnail: images
             fields:
               - { name: title, label: Trip name, widget: string }
-              - { name: place, label: Where, widget: string, required: false }
-              - { name: when, label: When (for example "Summer 2026"), widget: string, required: false }
-              - { name: description, label: Description (leave a blank line between paragraphs), widget: text, required: false }
-              - { name: images, label: Trip photos (select as many as you want at once), widget: image, multiple: true, required: false }
-              - { name: captions, label: "Photo captions, one per line, in the same order as the photos above", widget: text, required: false }
+              - { name: place, label: Where, widget: string, required: false, hint: "For example: Zion National Park, Utah" }
+              - { name: when, label: When, widget: string, required: false, hint: "For example: Summer 2026" }
+              - { name: description, label: The story, widget: text, required: false, hint: "Leave a blank line between paragraphs." }
+              - { name: images, label: Trip photos, widget: image, multiple: true, required: false, hint: "Select as many as you like at once. The first one is the trip's cover photo." }
+              - { name: captions, label: Photo captions, widget: text, required: false, hint: "One line per photo, in the same order as the photos above." }
 
       - name: projects
         label: Projects
@@ -70,13 +123,17 @@ collections:
             label: Projects
             label_singular: Project
             widget: list
+            collapsed: auto
             summary: "{{fields.title}}"
+            thumbnail: images
             fields:
               - { name: title, label: Project name, widget: string }
-              - { name: status, label: Status (for example "Ongoing" or "Completed 2026"), widget: string, required: false }
+              - { name: status, label: Status, widget: string, required: false, hint: "For example: Ongoing, or Completed 2026" }
               - { name: summary, label: One-sentence summary, widget: string, required: false }
-              - { name: description, label: Description (leave a blank line between paragraphs), widget: text, required: false }
-              - { name: images, label: Photos (one or many), widget: image, multiple: true, required: false }
+              - { name: description, label: Description, widget: text, required: false, hint: "Leave a blank line between paragraphs." }
+              - { name: images, label: Photos, widget: image, multiple: true, required: false, hint: "One or many. The first one is the project's main photo." }
+              - { name: captions, label: Photo captions, widget: text, required: false, hint: "Optional. One line per photo, in the same order as the photos above." }
+              - { name: link, label: Link, widget: string, required: false, hint: "Optional. A website, article or donation page about this project." }
 
       - name: site
         label: About and site info
@@ -84,8 +141,12 @@ collections:
         format: json
         fields:
           - { name: name, label: Your name, widget: string }
-          - { name: tagline, label: Home page tagline, widget: string, required: false }
-          - { name: about, label: About me (leave a blank line between paragraphs), widget: text, required: false }
+          - { name: tagline, label: Home page tagline, widget: string, required: false, hint: "The line under your name on joshuagnathan.com." }
+          - { name: cover, label: Home page photo, widget: image, required: false, hint: "The big photo on joshuagnathan.com. Leave empty to use your newest photo." }
+          - { name: about, label: About me, widget: text, required: false, hint: "Leave a blank line between paragraphs." }
           - { name: gear, label: Gear, label_singular: Item, widget: list, field: { name: item, label: Item, widget: string }, required: false }
-          - { name: email, label: "Public email (optional, leave blank to hide)", widget: string, required: false }
-          - { name: instagram, label: Instagram username (optional), widget: string, required: false }
+          - { name: email, label: Public email, widget: string, required: false, hint: "Optional. Leave blank to hide." }
+          - { name: instagram, label: Instagram username, widget: string, required: false, hint: "Optional. Just the username, without the @." }
+          - { name: photo_tagline, label: "JGN Photography: tagline", widget: string, required: false, hint: "The line under the title on jgnphotography.com." }
+          - { name: photo_cover, label: "JGN Photography: cover photo", widget: image, required: false, hint: "The full-screen photo at the top of jgnphotography.com. Leave empty to use your newest photo." }
+          - { name: photo_about, label: "JGN Photography: about the photographer", widget: text, required: false, hint: "Leave blank to use your About me text." }
