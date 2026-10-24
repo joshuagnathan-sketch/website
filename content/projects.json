@@ -5,6 +5,21 @@
       "status": "Ongoing",
       "summary": "I build butterfly gardens and raise monarchs to bring joy to seniors living in assisted living facilities.",
       "description": "My great-grandmother loved butterflies. After she passed away, I saw a monarch butterfly, the queen of the butterflies, and it reminded me of her, because she was the matriarch of our family. I had always loved taking care of plants, so I started raising butterflies by planting native flowering plants in my backyard.\n\nThis project honors her memory. I create butterfly gardens and bring butterflies to seniors in assisted living facilities, to share the same joy she found in them.\n\nWorking in nature and with living creatures brings me joy, and my hope is that these gardens put some smiles on the residents’ faces. Even a small act of kindness can make a difference in someone’s quality of life.",
+      "images": [
+        "/images/butterfly-01-before.webp",
+        "/images/butterfly-02-clearing.webp",
+        "/images/butterfly-03-garden-bed.webp",
+        "/images/butterfly-04-choosing-plants.webp",
+        "/images/butterfly-05-planting.webp",
+        "/images/butterfly-06-in-bloom.webp",
+        "/images/butterfly-07-caterpillar.webp",
+        "/images/butterfly-08-monarch.webp",
+        "/images/butterfly-09-release.webp",
+        "/images/butterfly-10-thank-you.webp",
+        "/images/butterfly-11-garden.webp",
+        "/images/butterfly-12-pruning.webp"
+      ],
+      "captions": "The yard before: just grass\nClearing and prepping the ground\nBuilding the garden bed\nChoosing butterfly-friendly plants\nPlanting\nThe garden comes to life\nA monarch caterpillar on milkweed\nA monarch feeding on lantana\nReleasing a butterfly\nA thank-you card from the residents\nThe finished garden\nPruning and caring for the garden",
       "video": "/videos/butterfly-garden.mp4",
       "poster": "/images/butterfly-video-poster.webp",
       "steps": [
@@ -27,27 +42,8 @@
         {
           "title": "Ongoing care",
           "text": "I trim, prune and care for the garden every week, and plan to keep building and caring for gardens until I graduate high school."
-        },
-        {
-          "title": "Teaching kids too",
-          "text": "I also helped 4th graders at Howard Drive Elementary raise their own butterflies, providing supplies and guidance."
         }
       ],
-      "images": [
-        "/images/butterfly-01-before.webp",
-        "/images/butterfly-02-clearing.webp",
-        "/images/butterfly-03-garden-bed.webp",
-        "/images/butterfly-04-choosing-plants.webp",
-        "/images/butterfly-05-planting.webp",
-        "/images/butterfly-06-in-bloom.webp",
-        "/images/butterfly-07-caterpillar.webp",
-        "/images/butterfly-08-monarch.webp",
-        "/images/butterfly-09-release.webp",
-        "/images/butterfly-10-thank-you.webp",
-        "/images/butterfly-11-garden.webp",
-        "/images/butterfly-12-pruning.webp"
-      ],
-      "captions": "The yard before: just grass\nClearing and prepping the ground\nBuilding the garden bed\nChoosing butterfly-friendly plants\nPlanting\nThe garden comes to life\nA monarch caterpillar on milkweed\nA monarch feeding on lantana\nReleasing a butterfly\nA thank-you card from the residents\nThe finished garden\nPruning and caring for the garden",
       "link": ""
     }
   ]
