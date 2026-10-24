@@ -83,5 +83,70 @@
   "output": "691a13fc9067e33649bb5961f1dfaf5034714d1de9e3f385d740f451dae4c6ea",
   "turn": "clockwise",
   "version": 2
+ },
+ "butterfly-01-before.webp": {
+  "output": "a3fbbbfe0cd4a2b6442db0386f8029c4bb831ed836d801e5dbbc00ba20a5c113",
+  "turn": "none",
+  "version": 2
+ },
+ "butterfly-02-clearing.webp": {
+  "output": "f80647c1d48ac3b3642a789e0e273d69e86d1d06c897f883f061b04e692d2b5f",
+  "turn": "none",
+  "version": 2
+ },
+ "butterfly-03-garden-bed.webp": {
+  "output": "13003f7c54ec6339b66d4d72f5ef83b642c34946084f52d5d954f4bb2cb85b22",
+  "turn": "none",
+  "version": 2
+ },
+ "butterfly-04-choosing-plants.webp": {
+  "output": "b9860dd401fa8b4fd2598ed944ab9bf2fa49a6d976c584afe393aea48a0dcdd4",
+  "turn": "none",
+  "version": 2
+ },
+ "butterfly-05-planting.webp": {
+  "output": "10fcdcb51ec5bce7ccb2d96d33be400f1b8e583b3cef366539e116154b3ccba4",
+  "turn": "none",
+  "version": 2
+ },
+ "butterfly-06-in-bloom.webp": {
+  "output": "3f213611d7e714f66c8d1cb922d28b1fb7e4f72ae1d2b77bae7953b3441bc8e9",
+  "turn": "none",
+  "version": 2
+ },
+ "butterfly-07-caterpillar.webp": {
+  "output": "b5f6b17333bf9fad476555c2441edc380c609c4b6254c2abd07a81083950f309",
+  "turn": "none",
+  "version": 2
+ },
+ "butterfly-08-monarch.webp": {
+  "output": "9f962e556cc835d6a9bd381d229acadc621ebb255ad656a3c27a68898ba32cfa",
+  "turn": "none",
+  "version": 2
+ },
+ "butterfly-09-release.webp": {
+  "output": "414bfe137da9f42ccc99d88b722fb6e8347c26a9bcab283e78f0afd3928c9e0f",
+  "turn": "none",
+  "version": 2
+ },
+ "butterfly-10-thank-you.webp": {
+  "output": "ff9bb5c38f711e1b04409fb13e74721b176771425a94baf8fc8d294c96a9f9c1",
+  "turn": "none",
+  "version": 2
+ },
+ "butterfly-11-garden.webp": {
+  "output": "e9514fb63d23a86161355c3b34392f231fdadeee5b08452dccbb6f2920848bef",
+  "turn": "none",
+  "version": 2
+ },
+ "butterfly-12-pruning.webp": {
+  "output": "be41e4174f816274b2005775b7dabc1c6e141cf0f36d74b78f77b36464c31683",
+  "turn": "none",
+  "version": 2
+ },
+ "butterfly-video-poster.webp": {
+  "output": "89d578644390f5a865f929df9c4a0fbdf21aea1e7fc98e138e183b88fefbe0eb",
+  "turn": "none",
+  "version": 2
  }
 }
