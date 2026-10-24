@@ -133,6 +133,18 @@ collections:
               - { name: description, label: Description, widget: text, required: false, hint: "Leave a blank line between paragraphs." }
               - { name: images, label: Photos, widget: image, multiple: true, required: false, hint: "One or many. The first one is the project's main photo." }
               - { name: captions, label: Photo captions, widget: text, required: false, hint: "Optional. One line per photo, in the same order as the photos above." }
+              - { name: video, label: Video, widget: file, required: false, hint: "Optional. An .mp4 video about the project. Keep it under 20 MB (export at 720p if it's bigger)." }
+              - { name: poster, label: Video cover image, widget: image, required: false, hint: "Optional. The picture shown before the video plays." }
+              - name: steps
+                label: How it came together
+                label_singular: Step
+                hint: "Optional. The milestones of your project, in order. Shown as a numbered timeline."
+                widget: list
+                required: false
+                summary: "{{fields.title}}"
+                fields:
+                  - { name: title, label: Step title, widget: string }
+                  - { name: text, label: What you did, widget: text, required: false }
               - { name: link, label: Link, widget: string, required: false, hint: "Optional. A website, article or donation page about this project." }
 
       - name: site
