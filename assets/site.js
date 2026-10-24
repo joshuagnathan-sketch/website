@@ -225,19 +225,61 @@
       var holder = $('#project-list'), items = data.projects || [];
       if (!items.length) { holder.append(empty('Projects coming soon.')); return; }
       items.forEach(function (p) {
+        var pics = flat([{ images: p.images, image: p.image, captions: p.captions, caption: p.title }]);
+        var steps = (p.steps || []).filter(function (s) { return s && (s.title || s.text); });
+        // A project with a video or steps gets the full story layout.
+        if (p.video || steps.length) { holder.append(feature(p, pics, steps)); return; }
         var text = el('div', null);
         if (p.status) text.append(el('span', { class: 'status', text: p.status }));
         text.append(el('h2', { text: p.title || 'Untitled project' }));
         if (p.summary) text.append(el('p', { class: 'summary', text: p.summary }));
         text.append(el('div', { class: 'prose' }, paragraphs(p.description)));
         if (p.link) text.append(el('a', { class: 'link', href: p.link, rel: 'noopener', text: 'Learn more ↗' }));
-        var pics = flat([{ images: p.images, image: p.image, captions: p.captions, caption: p.title }]);
         var art = el('article', { class: 'project' + (pics.length ? '' : ' no-media') });
         if (pics.length) art.append(media(pics, p.title));
         art.append(text);
         holder.append(art);
       });
     });
+  }
+
+  // Full story layout: title, video beside the story, a numbered timeline, then captioned photos.
+  function feature(p, pics, steps) {
+    var art = el('article', { class: 'feature' });
+    var head = el('header', { class: 'feature-head' });
+    if (p.status) head.append(el('span', { class: 'status', text: p.status }));
+    head.append(el('h2', { class: 'feature-title', text: p.title || 'Untitled project' }));
+    if (p.summary) head.append(el('p', { class: 'lede', text: p.summary }));
+    art.append(head);
+
+    var body = el('div', { class: 'feature-body' + (p.video ? '' : ' no-video') });
+    if (p.video) {
+      var vid = el('video', { src: encodeURI(p.video), poster: p.poster ? imgSrc(p.poster) : null, controls: '', playsinline: '', preload: 'metadata' });
+      body.append(el('figure', { class: 'feature-video' }, vid, el('figcaption', { text: 'The project so far' })));
+    }
+    var story = el('div', { class: 'prose feature-story' }, paragraphs(p.description));
+    if (p.link) story.append(el('a', { class: 'link', href: p.link, rel: 'noopener', text: 'Learn more ↗' }));
+    body.append(story);
+    art.append(body);
+
+    if (steps.length) {
+      var ol = el('ol', { class: 'steps' });
+      steps.forEach(function (s, i) {
+        ol.append(el('li', null, el('span', { class: 'step-num', text: String(i + 1).padStart(2, '0') }), el('h3', { text: s.title || '' }), el('p', { text: s.text || '' })));
+      });
+      art.append(el('section', { class: 'feature-section' }, el('h3', { class: 'eyebrow', text: 'How it came together' }), ol));
+    }
+
+    if (pics.length) {
+      var grid = el('div', { class: 'story-grid' });
+      pics.forEach(function (ph, i) {
+        var fig = el('figure', null, opener('', pics, i, photo(ph.image, ph.caption || p.title)));
+        if (ph.caption && ph.caption !== p.title) fig.append(el('figcaption', { text: ph.caption }));
+        grid.append(fig);
+      });
+      art.append(el('section', { class: 'feature-section' }, el('h3', { class: 'eyebrow', text: 'In photos' }), grid));
+    }
+    return art;
   }
 
   if (page === 'trips') {
