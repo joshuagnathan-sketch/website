@@ -28,3 +28,7 @@ there is saved into `/content`, and both sites update about a minute later.
 
 - `assets/style.css`: all styles for both sites
 - `assets/site.js`: builds every page from the files in `/content`
+
+When you change `assets/style.css` or `assets/site.js`, bump the `?v=` number
+where every page links to them, so visitors' browsers load the new version
+instead of a cached copy.
